@@ -4,50 +4,49 @@
 
 int main()
 {
-	char p = '1';
-	while(p != 'E')
+	char action = '1';
+	while(action != 'E')
 	{
 		printf("please choose a transaction type: \n O - open acount \n B - balnce inquiry \n D deposit \n W - Withdrawal \n C - Close acount \n I - Interest \n P - Print \n E - Exit \n"); 
-		int check = scanf(" %c ", &p);
-		if(check !=1)
-			printf("invalid transaction type \n");
-		else if(p == 'O')
+		int check = scanf(" %c ", &action);
+		if(check != 1)
+			printf("invalid transaction type \n"); 
+		else if(action == 'O')
 		{
 			open_account();
 			printf("\n");
-			}
-		else if(p == 'B')
+		}
+		else if(action == 'B')
 		{
 			balance_inquiry();
 			printf("\n");
-			}
-		else if(p == 'D')
+		}
+		else if(action == 'D')
 		{
 			deposit();
 			printf("\n");
-
-}
-		else if(p == 'W')
+		}
+		else if(action == 'W')
 		{
 			withdrawal();
 			printf("\n");
-			}
-		else if(p == 'C')
+		}
+		else if(action == 'C')
 		{
 			close_account();
 			printf("\n");
-			}
-		else if(p == 'I')
+		}
+		else if(action == 'I')
 		{
 			interest();
 			printf("\n");
-			}
-		else if(p == 'P')
+		}
+		else if(action == 'P')
 		{
 			printAll();
 			printf("\n");
-			}
-		else if(p == 'E')
+		}
+		else if(action == 'E')
 			close();
 		else 
 			printf("invalid transaction type \n"); 

@@ -1,16 +1,14 @@
 #include <stdio.h>
 
-
 #define length 51
 #define width 2
 
 
 int sumAccounts = 0;
-double accounts[length][width]={0};
+double accounts[length][width];
 
 void open_account()
 {
-printf("please enter amount for deposit \n");
 	if(sumAccounts < 50)
 	{
 		int i = 1;
@@ -20,7 +18,7 @@ printf("please enter amount for deposit \n");
 		}
 
 		double depo;
-	
+		printf("please enter amount for deposit: ");
 		int check = scanf("%lf" , &depo);
 		if(check != 1)
 			printf("Failed to read the amount \n");
@@ -44,8 +42,8 @@ printf("please enter amount for deposit \n");
 
 void balance_inquiry()
 {
-printf("please enter the account number \n");
 	int account ;
+	printf("please enter the account number: ");
 	scanf("%d", &account);
 	if(account  <= 950 && account  > 900)
 	{
@@ -61,16 +59,15 @@ printf("please enter the account number \n");
 
 void deposit()
 {
-printf("enter account number \n");
 	int account ;
-
+	printf("enter account number ");
 	scanf("%d", &account);
 	if(account  <= 950 && account  > 900)
 	{
 		if(accounts[account - 900][0] == 1)
 		{
 			double depo;
-			printf("enter your deposit amount \n");
+			printf("enter your deposit amount ");
 			int check = scanf("%lf", &depo);
 			if(check != 1)
 				printf("Failed to read the amount \n");
@@ -95,24 +92,23 @@ printf("enter account number \n");
 
 void withdrawal()
 {
-printf("enter account number \n");
 	int account ;
-	
+	printf("please enter account number ");
 	scanf("%d", &account);
 	if(account  < 950 && account  > 900)
 	{
 		if(accounts[account - 900][0] == 1)
 		{
-			double with;
-			printf("enter the deposit amount \n");
-			scanf("%lf", &with);
-			if(with >= 0 && with <= accounts[account - 900][1])
+			double withdraw;
+			printf("please enter the amount to withdraw ");
+			scanf("%lf", &withdraw);
+			if(withdraw >= 0 && withdraw <= accounts[account - 900][1])
 			{
-				accounts[account - 900][1] -= with;
-				printf("the amount of the account is: %lf \n",accounts[account - 900][1]);
+				accounts[account - 900][1] -= withdraw;
+				printf("the new balance is: %.2lf \n",accounts[account - 900][1]);
 			}
 			else
-				printf("failed to add the deposit \n");
+				printf("cannot withdraw more than the balance \n");
 		}
 		else
 			printf("the account is closed \n");
@@ -123,9 +119,8 @@ printf("enter account number \n");
 
 void close_account()
 {
-printf("enter account number \n");
 	int account ;
-
+	printf("enter account number ");
 	scanf("%d", &account);
 	if(account  <= 950 && account  > 900)
 	{
@@ -148,9 +143,8 @@ printf("enter account number \n");
 
 void interest()
 {
-printf("Please enter interest rate: \n");
 	double interests;
-
+	printf("Please enter interest rate: \n");
 	scanf("%lf", &interests);
 	if(interests > 0)
 	{
@@ -158,7 +152,7 @@ printf("Please enter interest rate: \n");
 		{
 			if(accounts[i][0] == 1)
 			{
-				accounts[i][1] *= ((interests/100)+1);
+				accounts[i][1] *= ((interests+100)/100);
 			}
 		}
 	}
@@ -172,20 +166,24 @@ void printAll()
 	{
 		if(accounts[i][0] == 1)
 		{
-			printf("the balance of the account %d is: %.2lf \n", (i+900) , accounts[i][1]);
+			printf("the balance of the account number %d is: %.2lf \n", (i+900) , accounts[i][1]);
 		}
 	}
 }
 
 void close()
 {
-	for(int i = 1 ; i < length ; i++)
+	if(sumAccounts > 0)
 	{
-		if(accounts[i][0] == 1)
+		for(int i = 1 ; i < length ; i++)
 		{
-			accounts[i][1] = 0;
-			accounts[i][0] = 0;
+			if(accounts[i][0] == 1)
+			{
+				accounts[i][1] = 0;
+				accounts[i][0] = 0;
+			}
 		}
 	}
 }
+
 
